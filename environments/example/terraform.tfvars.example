@@ -1,0 +1,24 @@
+# Copy to terraform.tfvars and adjust. Every value has a sane default in
+# variables.tf, so `terraform apply` works with zero tfvars - this file is
+# for when you want to customize.
+
+project_name = "serverless-dr"
+environment  = "dev"
+
+primary_region   = "us-east-1"
+secondary_region = "us-west-2"
+
+# Leave both null to skip DNS failover and just get two regional Lambda
+# Function URLs + health checks (no domain required). Set both to enable
+# the full Route 53 failover record.
+# hosted_zone_id  = "Z0123456789ABCDEFGHIJ"
+# dns_record_name = "api.example.com"
+
+# Uncomment to get an email when Route 53 marks the primary unhealthy.
+# alarm_notification_email = "you@example.com"
+
+route53_health_check_failure_threshold = 3
+route53_health_check_interval          = 10
+route53_record_ttl                     = 30
+
+s3_enable_replication_time_control = true
